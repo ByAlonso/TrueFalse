@@ -36,15 +36,22 @@ class _AnswerButtonState extends State<AnswerButton> {
 
   void checkAnswer() {
     setState(() {
-      if (widget.value ==
-          quizBrain.questions[quizBrain.getQuestionNumber()].answer) {
-        quizBrain
-            .addResultIcon(Icon(Icons.check, color: Colors.lightGreenAccent));
+      if (quizBrain.questions.length - 1 > quizBrain.getQuestionNumber()) {
+        if (widget.value ==
+            quizBrain.questions[quizBrain.getQuestionNumber()].answer) {
+          quizBrain
+              .addResultIcon(Icon(Icons.check, color: Colors.lightGreenAccent));
+          quizBrain.correctAnswer++;
+        } else {
+          quizBrain.addResultIcon(Icon(Icons.cancel, color: Colors.redAccent));
+        }
+        if (quizBrain.questions.length != quizBrain.getQuestionNumber())
+          quizBrain.increaseQuestion();
       } else {
-        quizBrain.addResultIcon(Icon(Icons.cancel, color: Colors.redAccent));
+        quizBrain.correctAnswer++;
+        quizBrain.showDialog();
       }
       widget.callBack();
-      quizBrain.increaseQuestion();
     });
   }
 }

@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class QuizBrain extends StatefulWidget {
   int _questionNumber = 0;
+  int correctAnswer = 0;
   List<Icon> resultBar = [];
   List<Questionn> questions = [
     Questionn('a', true),
@@ -10,6 +11,7 @@ class QuizBrain extends StatefulWidget {
     Questionn('d', true),
     Questionn('e', true),
   ];
+  bool gameFinished = false;
 
   getQuestionNumber() {
     return this._questionNumber;
@@ -21,6 +23,17 @@ class QuizBrain extends StatefulWidget {
 
   addResultIcon(Icon icon) {
     this.resultBar.add(icon);
+  }
+
+  showDialog() {
+    this.gameFinished = true;
+  }
+
+  resetAll() {
+    this.correctAnswer = 0;
+    this.gameFinished = false;
+    this.resultBar = [];
+    this._questionNumber = 0;
   }
 
   @override

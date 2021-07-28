@@ -4,6 +4,7 @@ import 'package:questions/question.dart';
 import 'package:questions/result_bar.dart';
 
 import 'answer_button.dart';
+import 'dialog.dart';
 
 final QuizBrain quizBrain = QuizBrain();
 
@@ -35,16 +36,18 @@ class _LayoutState extends State<Layout> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Question(),
-          AnswerButton(Colors.greenAccent, "True", true, callBack),
-          AnswerButton(Colors.redAccent, "False", false, callBack),
-          ResultBar(),
-        ],
-      ),
+      child: quizBrain.gameFinished
+          ? FinalDialog(callBack)
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Question(),
+                AnswerButton(Colors.greenAccent, "True", true, callBack),
+                AnswerButton(Colors.redAccent, "False", false, callBack),
+                ResultBar(),
+              ],
+            ),
     );
   }
 
